@@ -224,17 +224,17 @@ public final class AndorsTrailApplication extends Application {
 		}
 	}
 
-	private Boolean androidtv = null;
-
+	// Returns true if we're on an Android TV platform (assume no touchscreen, landscape, etc.)
+	private Boolean is_atv = null;
 	public boolean isAndroidTV(Context context) {
-		if (androidtv == null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // Check needed so we can still compile against Android ICS (14)
-                androidtv = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
-            } else {
-				androidtv = false;
+		if (is_atv == null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				is_atv = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+			} else {
+				is_atv = false;
 			}
-        }
-		return androidtv;
+		}
+		return is_atv;
 	}
 
 
