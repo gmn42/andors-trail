@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -27,6 +29,7 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.AttackResult;
 import com.gpl.rpg.AndorsTrail.controller.CombatController;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatActionListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatTurnListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListener;
@@ -103,6 +106,7 @@ public final class MainActivity
 		VirtualDpadView dpad = (VirtualDpadView) findViewById(R.id.main_virtual_dpad);
 		toolboxview = (ToolboxView) findViewById(R.id.main_toolboxview);
 		statusview.registerToolboxViews(toolboxview, quickitemview);
+		toolboxview.setFocusReturnView(mainview);
 
 		statusText = (TextView) findViewById(R.id.statusview_statustext);
 		statusText.setOnClickListener(new OnClickListener() {
@@ -196,6 +200,32 @@ public final class MainActivity
 			controllers.gameRoundController.resume();
 			updateStatus();
 		}
+	}
+
+	// CHANGELOG: Back now closes the toolbox if it's open.  Another Back will be needed to return to start screen.
+	@Override
+	public void onBackPressed() {
+		if (toolboxview.isVisible()) {
+			toolboxview.hideToolbox();
+			return;
+		}
+		super.onBackPressed();
+	}
+
+	// We use a global key listener to close the toolbox when the player presses the shortcut key,
+	// since catching the key in the views would require multiple listeners.
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		Log.d("MainActivity", "dispatchKeyEvent: " + event);
+		if(getToolboxView().isVisible()) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+				if (controllers.inputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
+					getToolboxView().hideToolbox();
+					return true;
+				}
+			}
+		}
+		return super.dispatchKeyEvent(event);
 	}
 
 	private void unsubscribeFromModel() {
@@ -543,5 +573,12 @@ public final class MainActivity
 			message(getString(R.string.combat_condition_monster_apply, target.getName(), msg));
 		}
 	}
+
+	// Getters for the views so that controllers can access them without having to know about the view hierarchy.
+	public StatusView getStatusView() { return statusview; }
+	public MainView getMainView() { return mainview; }
+	public CombatView getCombatView() { return combatview; }
+	public QuickitemView getQuickitemView() { return quickitemview; }
+	public ToolboxView getToolboxView() { return toolboxview; }
 
 }

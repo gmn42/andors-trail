@@ -1,7 +1,6 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.util.SparseIntArray;
 import android.view.KeyEvent;
@@ -9,7 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 
-import com.gpl.rpg.AndorsTrail.activity.HeroinfoActivity;
+import com.gpl.rpg.AndorsTrail.R;
+import com.gpl.rpg.AndorsTrail.activity.MainActivity;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.util.Coord;
@@ -30,22 +30,23 @@ public final class InputController implements OnClickListener, OnLongClickListen
 	private boolean keyState_attack = false;
 	private boolean keyState_flee = false;
 	private boolean keyState_endturn = false;
-	
-	final private int KEY_UNHANDLED = 0; // Default, for unhandled keycodes
-	final private int KEY_MOVE_UP = 1;
-	final private int KEY_MOVE_DOWN = 2;
-	final private int KEY_MOVE_LEFT = 3;
-	final private int KEY_MOVE_RIGHT = 4;
-	final private int KEY_MOVE_UP_LEFT = 5;
-	final private int KEY_MOVE_UP_RIGHT = 6;
-	final private int KEY_MOVE_DOWN_LEFT = 7;
-	final private int KEY_MOVE_DOWN_RIGHT = 8;
-	final private int KEY_ATTACK = 9;
-	final private int KEY_FLEE = 10;
-	final private int KEY_END_TURN = 11;
-	final private int KEY_HERO_INFO = 12;
-	final private int KEY_TOOLBOX = 13;
-	
+
+	public final int KEY_UNHANDLED = 0; // Default, for unhandled keycodes
+	public final int KEY_MOVE_UP = 1;
+	public final int KEY_MOVE_DOWN = 2;
+	public final int KEY_MOVE_LEFT = 3;
+	public final int KEY_MOVE_RIGHT = 4;
+	public final int KEY_MOVE_UP_LEFT = 5;
+	public final int KEY_MOVE_UP_RIGHT = 6;
+	public final int KEY_MOVE_DOWN_LEFT = 7;
+	public final int KEY_MOVE_DOWN_RIGHT = 8;
+	public final int KEY_ATTACK = 9;
+	public final int KEY_FLEE = 10;
+	public final int KEY_END_TURN = 11;
+	public final int KEY_HERO_INFO = 12;
+	public static final int KEY_TOOLBOX = 13;
+	public static final int KEY_DPAD_CENTER = 14; // Special handling for AndroidTV remotes
+
 	private SparseIntArray keyMap = new SparseIntArray();  // Android keycode to internal key event mapping.  TODO: Configure via preferences
 
 	public InputController(ControllerContext controllers, WorldContext world) {
@@ -64,7 +65,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
     TODO: Use delay timer to enable chorded diagonals on first move without locking kludge?
  */
 
-    // Map key codes to spectic internal actions  
+    // Map key codes to specific internal actions
 	// TODO: Move mapping out of code to JSON/XML file, or maybe player prefs
 	private void initializeKeyMap() {
 		int key;
@@ -135,7 +136,6 @@ public final class InputController implements OnClickListener, OnLongClickListen
 
 		// Keys mapping to ATTACK
 		key = KEY_ATTACK;
-		keyMap.put(KeyEvent.KEYCODE_DPAD_CENTER, key);
 		keyMap.put(KeyEvent.KEYCODE_BUTTON_A, key);
 		keyMap.put(KeyEvent.KEYCODE_SPACE, key);
 		keyMap.put(KeyEvent.KEYCODE_NUMPAD_5, key);
@@ -166,10 +166,18 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		keyMap.put(KeyEvent.KEYCODE_BUTTON_R1, key);
 		keyMap.put(KeyEvent.KEYCODE_NUMPAD_DIVIDE, key);
 		keyMap.put(KeyEvent.KEYCODE_B, key);
+
+		// Keys mapping to DPAD_CENTER (special handling for AndroidTV remotes)
+		// Currently OPENS the toolbox ONLY from MainView, to avoid conflicts with selecting
+		// items IN the toolbox.  Doesn't function as a toggle like KEY_TOOLBOX.
+		key = KEY_DPAD_CENTER;
+		keyMap.put(KeyEvent.KEYCODE_DPAD_CENTER, key);
 	}
 
 	// Generate game actions based on mapped keys
 	public boolean onKeyboardAction(Context context, KeyEvent event, boolean acceptInput) {
+		assert(context instanceof MainActivity); // Should only be called from MainActivity or its views, which should be the only place with keyboard focus.
+		MainActivity activity = (MainActivity) context;
 		//L.log("onKeyboardAction(): Processing action " + event.getAction() + " for keyCode " + event.getKeyCode());
 
 		if (event.getAction() != KeyEvent.ACTION_DOWN && event.getAction() != KeyEvent.ACTION_UP) return false; // don't handle other actions
@@ -260,14 +268,34 @@ public final class InputController implements OnClickListener, OnLongClickListen
 			
 			// "Hero Info" screen shortcut.  New activity takes focus, so we don't need to worry about repeats.
 			case KEY_HERO_INFO:
-				if (acceptInput && keydown) context.startActivity(new Intent(context, HeroinfoActivity.class));
+				// TODO: Make this a toggle, will need hook in MainActivity.
+				if (acceptInput && keydown) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							// Find the hero portrait icon in the layout (statusview.xml)
+							View heroPortrait = activity.findViewById(R.id.status_image);
+							if (heroPortrait != null) {
+								// Trigger the actual OnClickListener attached to the portrait
+								heroPortrait.performClick();
+							} else {
+								// Fallback: manually start the activity if the view isn't available
+								//activity.startActivity(new Intent(activity, HeroinfoActivity.class));
+								L.log("onKeyboardAction(): Hero portrait view not found, unable to open hero info screen.");
+
+							}
+						}
+					});
+				}
 				break;
-			
+
 			case KEY_TOOLBOX:
-//			???	ToolboxView toolboxview =  context.getApplicationContext(). findViewById(R.id.main_toolboxview);
-				
+			case KEY_DPAD_CENTER:
+				if (acceptInput && keydown && event.getRepeatCount() == 0) { // only trigger on initial key press, not repeats or release
+					activity.getToolboxView().showToolbox();
+				}
 				break;
-			
+
 			case KEY_UNHANDLED: // Unhandled keycode
 				return false;
 			
@@ -338,5 +366,9 @@ public final class InputController implements OnClickListener, OnLongClickListen
 
 		controllers.movementController.startMovement(lastTouchPosition_dx, lastTouchPosition_dy, lastTouchPosition_tileCoords);
 		return true;
+	}
+
+	public boolean isMappedKey(int keyCode, int keyAction) {
+		return keyMap.get(keyCode) == keyAction;
 	}
 }
