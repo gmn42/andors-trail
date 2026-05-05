@@ -3,7 +3,7 @@
     android:constantSize="true">
 
     <item
-        android:drawable="@drawable/ui_blue_tabwidget_enabled_selected"
+        android:drawable="@drawable/ui_blue_tabwidget_enabled_focused"
         android:state_focused="true"
         android:state_enabled="true"
         />
