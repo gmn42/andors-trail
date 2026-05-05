@@ -289,8 +289,8 @@ public final class InputController implements OnClickListener, OnLongClickListen
 				}
 				break;
 
+			case KEY_DPAD_CENTER:  // See note above about special case for dpad center key.
 			case KEY_TOOLBOX:
-			case KEY_DPAD_CENTER:
 				if (acceptInput && keydown && event.getRepeatCount() == 0) { // only trigger on initial key press, not repeats or release
 					activity.getToolboxView().showToolbox();
 				}
