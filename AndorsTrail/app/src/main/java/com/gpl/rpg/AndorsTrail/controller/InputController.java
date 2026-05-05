@@ -46,6 +46,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 	public final int KEY_HERO_INFO = 12;
 	public static final int KEY_TOOLBOX = 13; //toolbox toggle key
 	public static final int KEY_SELECT = 14; // DPAD_CENTER/SELECT mapping
+	public static final int KEY_BACK = 15;
 
 	private static final SparseIntArray keyMap = new SparseIntArray();  // Android keycode to internal key event mapping.  TODO: Configure via preferences
 
@@ -174,6 +175,13 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		keyMap.put(KeyEvent.KEYCODE_DPAD_CENTER, key);
 		keyMap.put(KeyEvent.KEYCODE_ENTER, key);
 		keyMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, key);
+
+		// Keys mapping to BACK (special handling for AndroidTV remotes, and general escape key)
+		// Note - this may be overridden by the system back button handler for some keys
+		key= KEY_BACK;
+		keyMap.put(KeyEvent.KEYCODE_BACK, key);
+		keyMap.put(KeyEvent.KEYCODE_ESCAPE, key);
+		keyMap.put(KeyEvent.KEYCODE_BUTTON_B, key);
 	}
 
 	// Generate game actions based on mapped keys

@@ -108,6 +108,14 @@ public final class MainActivity
 		statusview.registerToolboxViews(toolboxview, quickitemview);
 		toolboxview.setFocusReturnView(mainview);
 
+		// Hide toolbox when mainview gets focus, generally because some other activity closed and
+		// returned control to the playfield.  TODO: Check for touch mode compatibility
+		mainview.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				toolboxview.hideToolbox();
+			}
+		});
+
 		statusText = (TextView) findViewById(R.id.statusview_statustext);
 		statusText.setOnClickListener(new OnClickListener() {
 			@Override
@@ -212,15 +220,19 @@ public final class MainActivity
 		super.onBackPressed();
 	}
 
-	// We use a global key listener to close the toolbox when the player presses the shortcut key,
-	// since catching the key in the views would require multiple listeners.
+
+	// Global key handling for toolbox since we don't have focus on MainView when it's open.
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		Log.d("MainActivity", "dispatchKeyEvent: " + event);
 		if(getToolboxView().isVisible()) {
 			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
-				if (controllers.inputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
+				if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
 					getToolboxView().hideToolbox();
+					return true;
+				} else if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_BACK)) {
+					// Simulate a system back button press
+					onBackPressed();
 					return true;
 				}
 			}
