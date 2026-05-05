@@ -193,4 +193,20 @@
         <item name="android:layout_marginLeft">30sp</item>
     </style>
 
+    <style name="AndorsTrail_Style_ShopItemRow">
+        <item name="android:background">?attr/ui_theme_listselector_drawable</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
+
+    <style name="AndorsTrail_Style_ShopItemText" parent="android:Widget.TextView">
+        <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+    </style>
+
+    <style name="AndorsTrail_Style_ShopItemButton" parent="@style/AndorsTrail_Style_TextButton">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textSize">@dimen/smalltext</item>
+    </style>
+
 </resources>
