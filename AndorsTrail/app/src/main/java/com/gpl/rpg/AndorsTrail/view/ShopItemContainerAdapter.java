@@ -58,19 +58,14 @@ public final class ShopItemContainerAdapter extends ArrayAdapter<ItemEntry> {
 			b.setText(r.getString(R.string.shop_buyitem, price));
 			b.setEnabled(price > 0 && ItemController.canAfford(player, price));
 		}
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				clickListener.onItemActionClicked(position, itemType);
-			}
-		});
-		b = (Button) result.findViewById(R.id.shopitem_infobutton);
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				clickListener.onItemInfoClicked(position, itemType);
-			}
-		});
+		b.setOnClickListener(view -> clickListener.onItemActionClicked(position, itemType));
+
+		result.findViewById(R.id.shopitem_infobutton).setOnClickListener(view -> clickListener.onItemInfoClicked(position, itemType));
+
+		// Handlers for the row itself, so that it isn't necessary to hit the button exactly.
+		result.setOnClickListener(view -> clickListener.onItemInfoClicked(position, itemType));
+		result.setOnLongClickListener(view -> { clickListener.onItemActionClicked(position, itemType); return true; });
+
 		return result;
 	}
 
