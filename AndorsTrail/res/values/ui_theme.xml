@@ -11,11 +11,13 @@
         <item name="android:listSeparatorTextViewStyle">@style/AndorsTrail_Style_PreferencesListHeader</item>
         <item name="buttonQuickslotsButtonStyle">@style/AndorsTrail_Style_TextButton_Quickslots</item>
         <!-- XML drawables -->
+        <item name="android:selectableItemBackground">@drawable/ui_blue_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_blue_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_blue_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_blue_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_blue_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_blue_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_blue_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_blue_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_blue_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_blue_spinner_bg</item>
@@ -79,6 +81,9 @@
 		<!-- Actual dialogue text in convo -->
 		<item name="ui_theme_dialogue_dark_color">@color/ui_blue_palette_text_gray_mid</item>
 		<item name="ui_theme_dialogue_light_color">@color/ui_blue_palette_text_gray_light</item>
+        <!-- Override default text colors for preferences activity -->
+        <item name="android:textColorPrimary">@color/ui_blue_textbutton_textcolor</item>
+        <item name="android:textColorSecondary">@color/ui_blue_palette_text_gray_darker</item>
     </style>
 
 	<style name="AndorsTrailDialogTheme_Base" parent="android:Theme.Dialog">
@@ -93,13 +98,17 @@
         <item name="android:expandableListViewStyle">@style/AndorsTrail_Style_ExpandableListView</item>
         <item name="android:listSeparatorTextViewStyle">@style/AndorsTrail_Style_PreferencesListHeader</item>
         <item name="buttonQuickslotsButtonStyle">@style/AndorsTrail_Style_TextButton_Quickslots</item>
-        
+        <item name="android:textColorPrimary">@color/ui_blue_textbutton_textcolor</item>
+        <item name="android:textColorSecondary">@color/ui_blue_palette_text_gray_darker</item>
+        <item name="android:selectableItemBackground">@drawable/ui_blue_listselector</item>
+
         <!-- XML drawables -->
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_blue_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_blue_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_blue_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_blue_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_blue_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_blue_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_blue_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_blue_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_blue_spinner_bg</item>
@@ -203,11 +212,13 @@
     <!-- Green style alternative -->
     <style name="AndorsTrailTheme_Green_Base" parent="AndorsTrailTheme_Blue" >
         <!-- XML drawables -->
+        <item name="android:selectableItemBackground">@drawable/ui_green_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_green_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_green_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_green_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_green_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_green_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_green_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_green_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_green_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_green_spinner_bg</item>
@@ -260,11 +271,13 @@
     
      <style name="AndorsTrailDialogTheme_Green_Base" parent="AndorsTrailDialogTheme_Blue" >
         <!-- XML drawables -->
+        <item name="android:selectableItemBackground">@drawable/ui_green_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_green_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_green_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_green_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_green_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_green_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_green_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_green_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_green_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_green_spinner_bg</item>
@@ -335,11 +348,13 @@
 	<!-- Charcoal style alternative -->
     <style name="AndorsTrailTheme_Charcoal_Base" parent="AndorsTrailTheme_Blue" >
         <!-- XML drawables -->
+        <item name="android:selectableItemBackground">@drawable/ui_charcoal_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_charcoal_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_charcoal_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_charcoal_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_charcoal_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_charcoal_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_charcoal_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_charcoal_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_charcoal_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_charcoal_spinner_bg</item>
@@ -392,11 +407,13 @@
     
      <style name="AndorsTrailDialogTheme_Charcoal_Base" parent="AndorsTrailDialogTheme_Blue" >
         <!-- XML drawables -->
+        <item name="android:selectableItemBackground">@drawable/ui_charcoal_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_charcoal_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_charcoal_buttonbar</item>
         <item name="ui_theme_buttonbar_frame_drawable">@drawable/ui_charcoal_buttonbar_frame</item>
         <item name="ui_theme_groupindicator_drawable">@drawable/ui_charcoal_groupindicator</item>
         <item name="ui_theme_listseparator_drawable">@drawable/ui_charcoal_listseparator</item>
+        <item name="ui_theme_listselector_drawable">@drawable/ui_charcoal_listselector</item>
         <item name="ui_theme_radiobutton_drawable">@drawable/ui_charcoal_radiobutton</item>
         <item name="ui_theme_spinner_drawable">@drawable/ui_charcoal_spinner</item>
         <item name="ui_theme_spinner_bg_drawable">@drawable/ui_charcoal_spinner_bg</item>

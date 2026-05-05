@@ -9,6 +9,7 @@
     <attr name="ui_theme_buttonbar_frame_drawable" format="reference" />
     <attr name="ui_theme_groupindicator_drawable" format="reference" />
     <attr name="ui_theme_listseparator_drawable" format="reference" />
+    <attr name="ui_theme_listselector_drawable" format="reference" />
     <attr name="ui_theme_radiobutton_drawable" format="reference" />
     <attr name="ui_theme_spinner_drawable" format="reference" />
     <attr name="ui_theme_spinner_bg_drawable" format="reference" />

@@ -4,11 +4,13 @@
     <style name="AndorsTrail_Style_ListView" parent="android:style/Widget.ListView">
         <item name="android:background">?attr/ui_theme_stdframe_bitmap</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_ListView_Frameless" parent="android:style/Widget.ListView">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_TextButton_Base" parent="android:style/Widget.Button">
@@ -63,6 +65,7 @@
         <item name="android:groupIndicator">?attr/ui_theme_groupindicator_drawable</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
         <item name="android:childDivider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_PreferencesListHeader_Base">
