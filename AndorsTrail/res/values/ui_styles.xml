@@ -59,7 +59,7 @@
     <style name="AndorsTrail_Style_ExpandableListView" parent="android:style/Widget.ExpandableListView">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
         <item name="android:textAppearanceLarge">@style/AndorsTrail_Style_TextAppearance_ListItemTitle</item>
-        <item name="android:textAppearanceSmall">@style/AndorsTrail_Style_TextAppearance.ListItemSubtitle</item>
+        <item name="android:textAppearanceSmall">@style/AndorsTrail_Style_TextAppearance_ListItemSubtitle</item>
         <item name="android:groupIndicator">?attr/ui_theme_groupindicator_drawable</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
         <item name="android:childDivider">?attr/ui_theme_listseparator_drawable</item>
@@ -86,7 +86,7 @@
         <item name="android:textSize">22sp</item>
     </style>
 
-    <style name="AndorsTrail_Style_TextAppearance.ListItemSubtitle" parent="android:style/TextAppearance.Small">
+    <style name="AndorsTrail_Style_TextAppearance_ListItemSubtitle" parent="android:style/TextAppearance.Small">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
         <item name="android:textSize">14sp</item>
     </style>
