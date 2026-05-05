@@ -114,7 +114,9 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 					);
 		}
 
-		toggleUiVisibility();
+		if(! app.isAndroidTV(app)) {
+			toggleUiVisibility();
+		}
 		
 		app.getWorldSetup().startResourceLoader(res);
 	}
