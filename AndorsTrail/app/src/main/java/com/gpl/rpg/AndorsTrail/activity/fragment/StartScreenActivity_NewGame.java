@@ -130,7 +130,21 @@ public class StartScreenActivity_NewGame extends Fragment {
 		
 		return root;
 	}
-	
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		startscreen_enterheroname.requestFocus();
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (!hidden) {
+			startscreen_enterheroname.requestFocus();
+		}
+	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
