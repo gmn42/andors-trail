@@ -56,7 +56,9 @@ public final class HeroinfoActivity extends AndorsTrailBaseFragmentActivity {
 
 		// Select this tab as soon as its label receives d-pad / keyboard focus.
 		v.setOnFocusChangeListener((view, hasFocus) -> {
-			if (hasFocus) tabHost.setCurrentTabByTag(tag);
+			if (hasFocus && !getSupportFragmentManager().isStateSaved()) { // Don't change tab during activity shutdown
+				tabHost.setCurrentTabByTag(tag);
+			}
 		});
 
 		tabHost.addTab(tabHost.newTabSpec(tag).setIndicator(v), fragmentClass, null);
