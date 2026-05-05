@@ -73,5 +73,6 @@
     <attr name="ui_theme_reward_light_color" format="reference" />
     <attr name="ui_theme_dialogue_dark_color" format="reference" />
     <attr name="ui_theme_dialogue_light_color" format="reference" />
+    <attr name="ui_theme_focus_border_color" format="reference" />
 
 </resources>
