@@ -66,6 +66,7 @@
         <item name="ui_theme_palette_text_gray_light_color">@color/ui_blue_palette_text_gray_light</item>
         <item name="ui_theme_palette_text_gray_mid_color">@color/ui_blue_palette_text_gray_mid</item>
         <item name="ui_theme_textbutton_textcolor_color">@color/ui_blue_textbutton_textcolor</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_blue_textbutton_background</item>
 	    <!-- Player name in convo -->
 		<item name="ui_theme_playername_dark_color">@color/ui_blue_palette_orange_dark</item>
 		<item name="ui_theme_playername_light_color">@color/ui_blue_palette_orange_light</item>
@@ -253,6 +254,7 @@
         <item name="ui_theme_stdframe_bg_color">@color/ui_green_palette_green_dark</item>
         <item name="ui_theme_buttonbar_bg_color">@color/ui_green_palette_green_mid</item>
 		<item name="ui_theme_displayworldmap_bg_color">@color/ui_green_palette_green_dark</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_green_textbutton_background</item>
     </style>
     
     
@@ -384,6 +386,7 @@
         <item name="ui_theme_stdframe_bg_color">@color/ui_charcoal_palette_charcoal_dark</item>
         <item name="ui_theme_buttonbar_bg_color">@color/ui_charcoal_palette_charcoal_mid</item>
 		<item name="ui_theme_displayworldmap_bg_color">@color/ui_charcoal_palette_charcoal_dark</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_charcoal_textbutton_background</item>
     </style>
     
     
