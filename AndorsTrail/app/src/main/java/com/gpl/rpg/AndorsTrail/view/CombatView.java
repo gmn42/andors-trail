@@ -188,6 +188,7 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 	private void updatePlayerAP() {
 		playerAPBar.update(player.getMaxAP(), player.getCurrentAP());
 		updateAttackMoveButtonText();
+		enableFleeButtonIfPossible();
 	}
 	private void updateSelectedMonster(Monster selectedMonster) {
 		if (currentMonster != null && currentMonster == selectedMonster) return;
@@ -262,6 +263,10 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 			}
 		}
 	}
+
+	private void enableFleeButtonIfPossible() {
+		fleeButton.setEnabled(player.getCurrentAP() >= player.getMoveCost());
+	}
 	
 	private void updateAttackMoveButtonText() {
 		updateAttackMoveButtonText(world.model.uiSelections.selectedMonster != null);
@@ -276,6 +281,7 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 
 	public void updateStatus() {
 		updatePlayerAP();
+		enableFleeButtonIfPossible();
 		updateSelectedMonster(world.model.uiSelections.selectedMonster);
 	}
 
