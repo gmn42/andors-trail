@@ -44,10 +44,10 @@ public final class InputController implements OnClickListener, OnLongClickListen
 	public final int KEY_FLEE = 10;
 	public final int KEY_END_TURN = 11;
 	public final int KEY_HERO_INFO = 12;
-	public static final int KEY_TOOLBOX = 13;
-	public static final int KEY_DPAD_CENTER = 14; // Special handling for AndroidTV remotes
+	public static final int KEY_TOOLBOX = 13; //toolbox toggle key
+	public static final int KEY_SELECT = 14; // DPAD_CENTER/SELECT mapping
 
-	private SparseIntArray keyMap = new SparseIntArray();  // Android keycode to internal key event mapping.  TODO: Configure via preferences
+	private static final SparseIntArray keyMap = new SparseIntArray();  // Android keycode to internal key event mapping.  TODO: Configure via preferences
 
 	public InputController(ControllerContext controllers, WorldContext world) {
 		this.controllers = controllers;
@@ -170,8 +170,10 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		// Keys mapping to DPAD_CENTER (special handling for AndroidTV remotes)
 		// Currently OPENS the toolbox ONLY from MainView, to avoid conflicts with selecting
 		// items IN the toolbox.  Doesn't function as a toggle like KEY_TOOLBOX.
-		key = KEY_DPAD_CENTER;
+		key = KEY_SELECT;
 		keyMap.put(KeyEvent.KEYCODE_DPAD_CENTER, key);
+		keyMap.put(KeyEvent.KEYCODE_ENTER, key);
+		keyMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, key);
 	}
 
 	// Generate game actions based on mapped keys
@@ -289,7 +291,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 				}
 				break;
 
-			case KEY_DPAD_CENTER:  // See note above about special case for dpad center key.
+			case KEY_SELECT:  // See note above about special case for dpad center key.
 			case KEY_TOOLBOX:
 				if (acceptInput && keydown && event.getRepeatCount() == 0) { // only trigger on initial key press, not repeats or release
 					activity.getToolboxView().showToolbox();
@@ -368,7 +370,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		return true;
 	}
 
-	public boolean isMappedKey(int keyCode, int keyAction) {
+	public static boolean isMappedKey(int keyCode, int keyAction) {
 		return keyMap.get(keyCode) == keyAction;
 	}
 }
