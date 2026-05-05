@@ -11,6 +11,7 @@ import com.gpl.rpg.AndorsTrail.controller.ActorStatsController;
 import com.gpl.rpg.AndorsTrail.controller.CombatController;
 import com.gpl.rpg.AndorsTrail.controller.ConversationController;
 import com.gpl.rpg.AndorsTrail.controller.GameRoundController;
+import com.gpl.rpg.AndorsTrail.controller.InputDeviceController;
 import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
 import com.gpl.rpg.AndorsTrail.controller.MapController;
@@ -32,6 +33,7 @@ public final class ControllerContext {
 	public final MonsterSpawningController monsterSpawnController;
 	public final MovementController movementController;
 	public final ActorStatsController actorStatsController;
+	public final InputDeviceController inputDeviceController;
 	public final InputController inputController;
 	public final SkillController skillController;
 
@@ -52,6 +54,7 @@ public final class ControllerContext {
 		this.monsterSpawnController = new MonsterSpawningController(this, world);
 		this.movementController = new MovementController(this, world);
 		this.actorStatsController = new ActorStatsController(this, world);
+		this.inputDeviceController = new InputDeviceController(app);
 		this.inputController = new InputController(this, world);
 		this.skillController = new SkillController(this, world);
 	}
